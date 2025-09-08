@@ -21,7 +21,7 @@ pipeline {
     }
    // stage('Static Code Analysis') {
       //environment {
-       // SONAR_URL = "http://54.152.15.111:9000"
+       // SONAR_URL = "http://35.171.16.190:9000"
      // }
      // steps {
        // withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
