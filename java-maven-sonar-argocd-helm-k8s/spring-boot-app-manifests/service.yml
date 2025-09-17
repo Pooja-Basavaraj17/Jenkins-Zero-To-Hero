@@ -10,7 +10,5 @@ spec:
     port: 80
     targetPort: 8080
     protocol: TCP
-    nodePort: 30080  # You can choose a port between 30000–32767
   selector:
     app: spring-boot-app
-
