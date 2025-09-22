@@ -5,6 +5,20 @@ pipeline {
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
   }
+
+
+   environment {
+        SONAR_URL = "http://13.222.211.99:9000"
+        JAVA_HOME = "/opt/java/openjdk" // Optional override
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"
+    }
+
+    tools {
+        // Optional if using Docker image with Java 17 pre-installed
+        jdk 'Java_17'
+    }
+
+
   stages {
     stage('Checkout') {
       steps {
