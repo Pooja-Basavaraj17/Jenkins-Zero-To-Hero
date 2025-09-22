@@ -2,7 +2,7 @@
 pipeline {
   agent {
     docker {
-      image 'maven:3.8.6-eclipse-temurin-17' // ✅ Java 17-compatible image
+      image 'abhishekf5/maven-abhishek-docker-agent:v1'
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
     }
   }
