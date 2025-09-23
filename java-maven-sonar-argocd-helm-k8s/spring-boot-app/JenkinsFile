@@ -1,5 +1,5 @@
 
-# Manually generate the updated Jenkinsfile content with the new SonarQube Analysis stage
+// Manually generate the updated Jenkinsfile content with the new SonarQube Analysis stage
 
 jenkinsfile_content = '''pipeline {
   agent {
@@ -96,7 +96,7 @@ jenkinsfile_content = '''pipeline {
 }
 '''
 
-# Save the updated Jenkinsfile
+// Save the updated Jenkinsfile
 with open("Jenkinsfile_with_sonarqube", "w") as f:
     f.write(jenkinsfile_content)
 
