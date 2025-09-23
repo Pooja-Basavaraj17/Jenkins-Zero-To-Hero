@@ -49,10 +49,9 @@ jenkinsfile_content = '''pipeline {
         withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
           sh '''
             cd java-maven-sonar-argocd-helm-k8s/spring-boot-app
-            mvn clean verify sonar:sonar \\
-              -Dsonar.projectKey=spring-boot-app \\
-              -Dsonar.host.url=http://18.206.163.56:9000 \\
-              -Dsonar.login=$SONAR_TOKEN
+            mvn clean verify sonar:sonar -Dsonar.projectKey=spring-boot-app -Dsonar.host.url=http://18.206.163.56:9000 -Dsonar.login=$SONAR_TOKEN
+             
+              
           '''
         }
       }
