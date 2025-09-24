@@ -1,3 +1,4 @@
+
 pipeline {
   agent {
     docker {
@@ -7,19 +8,16 @@ pipeline {
   }
 
   environment {
-    SONAR_URL = "http://44.212.23.63:9000"
+    SONAR_URL = "https://your-sonarqube-server.com" // Replace with your actual SonarQube URL
     JAVA_HOME = "/opt/java/openjdk"
     PATH = "${JAVA_HOME}/bin:${env.PATH}"
-  }
-
-  tools {
-    jdk 'Java_17'
   }
 
   stages {
     stage('Checkout') {
       steps {
         sh 'echo passed'
+        // Uncomment below to enable Git checkout
         // git branch: 'main', url: 'https://github.com/Pooja-Basavaraj17/Jenkins-Zero-To-Hero.git'
       }
     }
@@ -34,7 +32,13 @@ pipeline {
     stage('Static Code Analysis') {
       steps {
         withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
-          sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean verify sonar:sonar -Dsonar.projectKey=spring-boot-app -Dsonar.host.url=$SONAR_URL -Dsonar.login=$SONAR_AUTH_TOKEN'
+          sh '''
+            cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && \
+            mvn clean verify sonar:sonar \
+            -Dsonar.projectKey=spring-boot-app \
+            -Dsonar.host.url=$SONAR_URL \
+            -Dsonar.login=$SONAR_AUTH_TOKEN
+          '''
         }
       }
     }
@@ -65,7 +69,6 @@ pipeline {
           sh '''
             git config user.email "poojusmith17@gmail.com"
             git config user.name "Pooja-Basavaraj17"
-            BUILD_NUMBER=${BUILD_NUMBER}
             sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
             git add java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
             git commit -m "Update deployment image to version ${BUILD_NUMBER}"
