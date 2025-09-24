@@ -7,17 +7,18 @@ pipeline {
     }
   }
 
+  tools {
+    jdk 'Java_17' // This tells Jenkins to use the Java 17 installed via Global Tool Configuration
+  }
+
   environment {
     SONAR_URL = "https://your-sonarqube-server.com" // Replace with your actual SonarQube URL
-    JAVA_HOME = "/opt/java/openjdk"
-    PATH = "${JAVA_HOME}/bin:${env.PATH}"
   }
 
   stages {
     stage('Checkout') {
       steps {
         sh 'echo passed'
-        // Uncomment below to enable Git checkout
         // git branch: 'main', url: 'https://github.com/Pooja-Basavaraj17/Jenkins-Zero-To-Hero.git'
       }
     }
